@@ -1,0 +1,4 @@
+require 'thor'
+
+class RamlRubyClient < Thor::Command
+end
