@@ -1,0 +1,26 @@
+require '<%= parser.library_path %>/http'
+
+module <%= parser.module_name %>
+  class Client
+    attr_reader :config
+
+    # Initialize a client
+    #
+    # @example
+    #   <%= parser.module_name %>::Client.new
+    #
+    def initialize(config = <%= parser.module_name %>.config)
+      @config = config
+    end
+
+<% parser.apis.each do |api| -%>
+<%= indent(include('method', api: api), 4) %>
+<% end -%>
+
+    private
+
+    def http
+      @http ||= Http.new(config)
+    end
+  end
+end

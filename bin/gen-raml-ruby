@@ -1,4 +1,21 @@
-require 'thor'
+#!/usr/bin/env ruby
 
-class RamlRubyClient < Thor::Command
+require 'thor'
+require "bundler/setup"
+require 'raml_ruby_client/generator'
+
+require 'pry'
+
+class RamlRubyGenerator < Thor
+
+  desc "gen [Raml File]", "generate Ruby Client from Raml File"
+  option :output, :type => :string
+  def gen(raml_file)
+    output = options[:output] || '.'
+    RamlRubyClient::Generator.new.generate(raml_file, output)
+  end
 end
+
+RamlRubyGenerator.start(ARGV)
+
+

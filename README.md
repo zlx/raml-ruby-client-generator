@@ -26,7 +26,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-gen-raml-ruby path/to/raml/file.raml
+gen-raml-ruby gen path/to/raml/file.raml --output example
 ```
 
 ## Contributing

@@ -1,0 +1,7 @@
+module <%= parser.module_name %>
+  class Configuration
+<% parser.config_keys.each do |key| -%>
+    attr_accessor :<%= key %>
+<% end -%>
+  end
+end

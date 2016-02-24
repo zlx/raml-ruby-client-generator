@@ -1,0 +1,3 @@
+def <%= api.method_name %>(query = {}, body = {}, headers = {})
+  http.<%= api.verb.downcase %>("<%= api.path %>", query: query, body: body, headers: headers)
+end

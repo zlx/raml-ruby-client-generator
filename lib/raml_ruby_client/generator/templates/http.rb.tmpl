@@ -1,0 +1,49 @@
+require 'httparty'
+require 'addressable/uri'
+
+module <%= parser.module_name %>
+  class Http # nodoc
+    attr_reader :config
+
+    BASE_URL = "<%= parser.base_uri %>".freeze
+
+    def initialize(config)
+      @config = config
+      @endpoint = config.endpoint || BASE_URL
+    end
+
+    def get(path, options = {})
+      request('GET', path, options)
+    end
+
+    def put(path, options = {})
+      request('PUT', path, options)
+    end
+
+    def post(path, options = {})
+      request('POST', path, options)
+    end
+
+    def delete(path, options = {})
+      request('DELETE', path, options)
+    end
+
+    def options(path, options = {})
+      request('OPTIONS', path, options)
+    end
+
+    def head(path, options = {})
+      request('HEAD', path, options)
+    end
+
+    private
+
+    def request(verb, path, options = {})
+      path = @endpoint + path
+      options.merge!(uri_adapter: Addressable::URI)
+
+      HTTParty.__send__(verb.downcase, path, options)
+    end
+
+  end
+end
